@@ -3,7 +3,7 @@ import { useNavigate, generatePath, useParams } from 'react-router-dom';
 import { AppRoute, ApiRoute } from '../../consts';
 import { getVideoDuration, timeToPercent } from '../../Services/Utils';
 import { appContext } from '../../Context/App';
-import { Loader } from '../../components/Loader/Loader';
+import { Loader } from '../../Components/Loader/Loader';
 import { FilmCardType } from '../../Types/Films';
 import { createApi } from '../../Services/Api';
 

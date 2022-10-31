@@ -1,7 +1,7 @@
-import { Header } from '../../components/Header/Header';
-import { FilmCardBackground } from '../../components/FilmCardBackground/FilmCardBackground';
-import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs';
-import { ReviewForm } from '../../components/ReviewForm/ReviewForm';
+import { Header } from '../../Components/Header/Header';
+import { FilmCardBackground } from '../../Components/FilmCardBackground/FilmCardBackground';
+import { BreadCrumbs } from '../../Components/BreadCrumbs/BreadCrumbs';
+import { ReviewForm } from '../../Components/ReviewForm/ReviewForm';
 
 const crumbsData = [
     {

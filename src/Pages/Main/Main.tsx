@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
-import { Header } from '../../components/Header/Header';
-import { FilmCardPreview } from '../../components/FilmCardPreview/FilmCardPreview';
-import { FilmCardBackground } from '../../components/FilmCardBackground/FilmCardBackground';
-import { GenresList } from '../../components/GenresList/GenresList';
-import { FilmsList } from '../../components/FilmsList/FilmsList';
-import { Footer } from '../../components/Footer/Footer';
-import { Loader } from '../../components/Loader/Loader';
+import { Header } from '../../Components/Header/Header';
+import { FilmCardPreview } from '../../Components/FilmCardPreview/FilmCardPreview';
+import { FilmCardBackground } from '../../Components/FilmCardBackground/FilmCardBackground';
+import { GenresList } from '../../Components/GenresList/GenresList';
+import { FilmsList } from '../../Components/FilmsList/FilmsList';
+import { Footer } from '../../Components/Footer/Footer';
+import { Loader } from '../../Components/Loader/Loader';
 import { getGenries, filterFilmsByGenre } from '../../Services/Utils';
 import { DEFAULT_GENRE } from '../../consts';
 import { FilmCardType } from '../../Types/Films';

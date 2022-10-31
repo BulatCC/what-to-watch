@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { Header } from '../../components/Header/Header';
-import { FilmsList } from '../../components/FilmsList/FilmsList';
-import { Footer } from '../../components/Footer/Footer';
-import { Loader } from '../../components/Loader/Loader';
+import { Header } from '../../Components/Header/Header';
+import { FilmsList } from '../../Components/FilmsList/FilmsList';
+import { Footer } from '../../Components/Footer/Footer';
+import { Loader } from '../../Components/Loader/Loader';
 import { appContext } from '../../Context/App';
 
 const MyList = () => {

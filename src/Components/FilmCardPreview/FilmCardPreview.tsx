@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Button } from '../Button/Button';
 import { AppRoute, AuthorizationStatus } from '../../consts';
 import { appContext } from '../../Context/App';
-import { Loader } from '../../components/Loader/Loader';
+import { Loader } from '../../Components/Loader/Loader';
 
 type FilmCardPreviewProps = {
 

@@ -8,7 +8,7 @@ import { Film } from './Pages/Film/Film';
 import { AddReview } from './Pages/AddReview/AddReview';
 import { NotFound } from './Pages/NotFound/NotFound';
 import { Player } from './Pages/Player/Player';
-import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
+import { PrivateRoute } from './Components/PrivateRoute/PrivateRoute';
 import { appContext } from './Context/App';
 import { actionCreator } from './Context/Actions';
 import { createApi } from './Services/Api';
