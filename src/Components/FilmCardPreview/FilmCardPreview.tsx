@@ -4,11 +4,7 @@ import { AppRoute, AuthorizationStatus } from '../../consts';
 import { appContext } from '../../Context/App';
 import { Loader } from '../../Components/Loader/Loader';
 
-type FilmCardPreviewProps = {
-
-};
-
-const FilmCardPreview = ({ }: FilmCardPreviewProps) => {
+const FilmCardPreview = () => {
     const { state: { authorizationStatus, currentFilm } } = useContext(appContext);
 
     if (!currentFilm) {

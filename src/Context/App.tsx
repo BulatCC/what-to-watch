@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useReducer } from 'react';
 import { AuthorizationStatus } from '../consts';
 import { actions } from './Actions';
-import { AppState, ActionType, ContextType } from  '../Types/State';
+import { AppState, ActionType, ContextType } from  '../Types/Context';
 
 type UserContextProviderProps = {
     children: ReactNode;
@@ -10,8 +10,12 @@ type UserContextProviderProps = {
 const initialState: AppState = {
     isDataLoaded: false,
     defaultFilmsData: [],
-    authorizationStatus: AuthorizationStatus.Auth,
+    authorizationStatus: AuthorizationStatus.Unknown,
     currentFilm: null,
+    userData: {
+        avatarUrl: '',
+        email: '',
+    }
 };
 
 const reducer = (state: AppState, action: ActionType) => {
@@ -31,6 +35,16 @@ const reducer = (state: AppState, action: ActionType) => {
             return {
                 ...state,
                 currentFilm: payload,
+            };
+        case actions.Auth:
+            return {
+                ...state,
+                authorizationStatus: payload,
+            };
+        case actions.SetUserData:
+            return {
+                ...state,
+                userData: payload,
             };
         default:
             return state;

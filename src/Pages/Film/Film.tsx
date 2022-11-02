@@ -9,14 +9,13 @@ import { Tabs } from '../../Components/Tabs/Tabs';
 import { Loader } from '../../Components/Loader/Loader';
 import { AppRoute, AuthorizationStatus, ApiRoute } from '../../consts';
 import { appContext } from '../../Context/App';
-import { actionCreator } from '../../Context/Actions';
+import { apiActions } from '../../Context/ApiActions';
 import { useScrollTop } from '../../Hooks/UseScrollTop';
 import { createApi } from '../../Services/Api';
 import { FilmCardType } from '../../Types/Films';
 
 const Film = () => {
-    const { state: { authorizationStatus } } = useContext(appContext);
-    const [filmData, setFilmData] = useState<FilmCardType | null>(null);
+    const { state: { authorizationStatus, currentFilm } } = useContext(appContext);
     const [similarFilmData, setSimilarFilmData] = useState<FilmCardType[] | null>(null);
     const { dispatch } = useContext(appContext);
     const api = createApi();
@@ -24,12 +23,7 @@ const Film = () => {
     const urlId = useParams().id || '';
 
     useEffect(() => {
-        api.get(`${ApiRoute.Films}/${urlId}`)
-            .then(({ data }) => {
-                dispatch(actionCreator.currentFilm(data));
-                setFilmData(data);
-            })
-            .catch((e) => console.log(e));
+        apiActions.getCurrentFilm(dispatch, urlId);
         api.get(`${ApiRoute.Films}/${urlId}/similar`)
             .then(({ data }) => {
                 setSimilarFilmData(data);
@@ -37,11 +31,11 @@ const Film = () => {
             .catch((e) => console.log(e));
     }, [urlId]);
 
-    if (!filmData) {
+    if (!currentFilm) {
         return <Loader />;
     }
 
-    const { backgroundImage, backgroundColor, posterImage, name, genre, released, id } = filmData;
+    const { backgroundImage, backgroundColor, posterImage, name, genre, released, id } = currentFilm;
 
     return (
         <>
@@ -73,7 +67,7 @@ const Film = () => {
                         </div>
 
                         <div className='film-card__desc'>
-                            <Tabs tabsData={filmData} filmId={urlId} />
+                            <Tabs tabsData={currentFilm} filmId={urlId} />
                         </div>
                     </div>
                 </div>

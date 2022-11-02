@@ -19,7 +19,6 @@ const FilmCard = ({ filmData: { id, previewImage, name, previewVideoLink } }: Fi
                 setShowVideo(isMouseInside);
             }, 1000);
         }
-
         return () => {
             timeOut && clearTimeout(timeOut)
             setShowVideo(false);

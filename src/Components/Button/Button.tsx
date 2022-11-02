@@ -5,9 +5,10 @@ type ButtonProps = {
     linkPath?: string;
     linkId?: string;
     svgHref?: string;
+    clickHandler?: () => void;
 };
 
-const Button = ({ title, svgHref, linkPath, linkId }: ButtonProps): JSX.Element => {
+const Button = ({ title, svgHref, linkPath, linkId, clickHandler }: ButtonProps): JSX.Element => {
     {
         if (linkPath) {
             const link = generatePath(linkPath, { id: linkId && linkId });
@@ -21,7 +22,7 @@ const Button = ({ title, svgHref, linkPath, linkId }: ButtonProps): JSX.Element 
             )
         } else {
             return (
-                <button className="btn film-card__button" type="button">
+                <button className="btn film-card__button" type="button" onClick={clickHandler}>
                     {svgHref && <svg viewBox="0 0 19 19" width="19" height="19">
                         <use xlinkHref={svgHref}></use>
                     </svg>}

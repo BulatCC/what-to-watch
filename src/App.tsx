@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { AppRoute,ApiRoute } from './consts';
+import { AppRoute } from './consts';
 import { Main } from './Pages/Main/Main';
 import { Login } from './Pages/Login/Login';
 import { MyList } from './Pages/MyList/MyList';
@@ -10,25 +10,15 @@ import { NotFound } from './Pages/NotFound/NotFound';
 import { Player } from './Pages/Player/Player';
 import { PrivateRoute } from './Components/PrivateRoute/PrivateRoute';
 import { appContext } from './Context/App';
-import { actionCreator } from './Context/Actions';
-import { createApi } from './Services/Api';
+import { apiActions } from './Context/ApiActions';
 
 const App = () => {
     const { dispatch } = useContext(appContext);
-    const api = createApi();
 
     useEffect(() => {
-        api.get(ApiRoute.Films)
-        .then(({ data }) => {
-            dispatch(actionCreator.loadFilms(data));
-            dispatch(actionCreator.isDataLoaded(true));
-        })
-        .catch((e) => console.log(e));
-        api.get(ApiRoute.Promo)
-        .then(({ data }) => {
-            dispatch(actionCreator.currentFilm(data));
-        })
-        .catch((e) => console.log(e));
+        apiActions.getFilms(dispatch);
+        apiActions.getPromoFilm(dispatch);
+        apiActions.checkAuthStatus(dispatch);
     }, []);
 
     return (

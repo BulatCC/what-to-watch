@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../consts';
-import { UserBlock } from '../UseBlock/UserBlock';
+import { UserBlock } from '../UserBlock/UserBlock';
 
 type HeaderProps = {
     isPageMain?: boolean;

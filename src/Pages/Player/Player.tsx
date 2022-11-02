@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef, useContext } from 'react';
 import { useNavigate, generatePath, useParams } from 'react-router-dom';
-import { AppRoute, ApiRoute } from '../../consts';
+import { AppRoute } from '../../consts';
 import { getVideoDuration, timeToPercent } from '../../Services/Utils';
 import { appContext } from '../../Context/App';
 import { Loader } from '../../Components/Loader/Loader';
 import { FilmCardType } from '../../Types/Films';
-import { createApi } from '../../Services/Api';
+import { apiActions } from '../../Context/ApiActions';
 
 const Player = () => {
     const hasHistory = window.history.state;
@@ -17,9 +17,9 @@ const Player = () => {
     const { state: { currentFilm } } = useContext(appContext);
     const [video, setVideo] = useState<FilmCardType | null>(currentFilm);
     const videoRef = useRef<HTMLVideoElement | null>(null);
-    const urlId = useParams().id;
-    const api = createApi();
+    const urlId = useParams().id as string;
     const link = generatePath(AppRoute.Film, { id: urlId });
+    const { dispatch } = useContext(appContext);
 
     const fullScreenChangeHandler = () => {
         fullScreen ? setfullScreen(false) : setfullScreen(true);
@@ -65,12 +65,8 @@ const Player = () => {
 
     useEffect(() => {
         if (video?.id.toString() !== urlId) {
-            console.log(11)
-            api.get(`${ApiRoute.Films}/${urlId}`)
-            .then(({ data }) => {
-                setVideo(data);
-            })
-            .catch((e) => console.log(e));
+            apiActions.getCurrentFilm(dispatch, urlId);
+            setVideo(currentFilm);
         }
     });
 

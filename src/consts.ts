@@ -23,6 +23,8 @@ const ApiRoute = {
     Films: '/films',
     Comments: '/comments',
     Promo: '/promo',
+    Login: '/login',
+    Logout: '/logout',
 };
 
 const FilmRateDescription = {

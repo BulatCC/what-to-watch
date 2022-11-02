@@ -1,46 +1,59 @@
-import { ChangeEvent, useState, useEffect } from 'react';
+import { ChangeEvent, useState, useEffect,useContext } from 'react';
 import { ButtonBig } from '../ButtonBig/ButtonBig';
 import { useDebounce } from '../../Hooks/UseDebounce';
 import { validateEmail } from '../../Services/Utils';
+import { appContext } from '../../Context/App';
+import { apiActions } from '../../Context/ApiActions';
 
 const LoginForm = () => {
-    const [inputValue, setInpuValue] = useState('');
+    const [inputValue, setInpuValue] = useState({
+        email: '',
+        password: '',
+    });
     const [isEmailValid, setIsEmailValid] = useState(true);
+    const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [singInMessage, setSingInMessage] = useState('Enter valid email adress and any password.');
-    const debounceInput = useDebounce(inputValue, 500);
-    const debounceEmail = useDebounce(isEmailValid, 500);
+    const debounceEmailInput = useDebounce(inputValue.email, 500);
+    const debounceEmailError = useDebounce(isEmailValid, 500);
+    const { dispatch } = useContext(appContext);
     const buttonClickHandler = () => {
-        console.log('click');
+        if (inputValue.email && inputValue.password) {
+            apiActions.login(dispatch, inputValue);
+        }
     };
 
-    const showError = () => {
-        if (inputValue.length === 0) {
+    const showEmailError = () => {
+        if (inputValue.email.length === 0) {
             return true;
         }
-        return debounceEmail;
+        return debounceEmailError;
     }
 
     useEffect(() => {
-        if (inputValue.length > 0) {
-            setIsEmailValid(validateEmail(debounceInput));
+        if (inputValue.email.length > 0) {
+            setIsEmailValid(validateEmail(debounceEmailInput));
         }
-    }, [debounceInput]);
+    }, [debounceEmailInput]);
 
     useEffect(() => {
-        if (inputValue.length > 0) {
+        if (inputValue.email.length > 0) {
             isEmailValid ? setSingInMessage('Email is correct.') : setSingInMessage('Please enter a valid email address.');
         }
     }, [isEmailValid]);
     
     useEffect(() => {
-        if (inputValue.length === 0) {
+        if (inputValue.email.length === 0) {
             setIsEmailValid(true);
             setSingInMessage('Enter valid email adress and any password.');
         }
-    }, [inputValue]);
+    }, [inputValue.email]);
 
     const inputHandler = (evt: ChangeEvent<HTMLInputElement>) => {
-        setInpuValue(evt.target.value);
+        setInpuValue({
+            ...inputValue,
+            [evt.target.name]: evt.target.value,
+        });
+        evt.target.name === 'password' && evt.target.value === '' ? setIsPasswordValid(false) : setIsPasswordValid(true)
     }
 
     return (
@@ -49,13 +62,13 @@ const LoginForm = () => {
                 <p>{singInMessage}</p>
             </div>
             <div className='sign-in__fields'>
-                <div className={`sign-in__field ${showError() ? '' : 'sign-in__field--error'}`} >
-                    <input onInput={inputHandler} className='sign-in__input' type='email' placeholder='Email address' name='user-email' id='user-email' />
-                    <label className='sign-in__label visually-hidden' htmlFor='user-email'>Email address</label>
+                <div className={`sign-in__field ${showEmailError() ? '' : 'sign-in__field--error'}`} >
+                    <input onInput={inputHandler} className='sign-in__input' type='email' placeholder='Email address' name='email' id='email' />
+                    <label className='sign-in__label visually-hidden' htmlFor='email'>Email address</label>
                 </div>
-                <div className='sign-in__field'>
-                    <input className='sign-in__input' type='password' placeholder='Password' name='user-password' id='user-password' />
-                    <label className='sign-in__label visually-hidden' htmlFor='user-password'>Password</label>
+                <div className={`sign-in__field ${isPasswordValid ? '' : 'sign-in__field--error'}`} >
+                    <input onInput={inputHandler} className='sign-in__input' type='password' placeholder='Password' name='password' id='password' />
+                    <label className='sign-in__label visually-hidden' htmlFor='password'>Password</label>
                 </div>
             </div>
             <div className='sign-in__submit'>
