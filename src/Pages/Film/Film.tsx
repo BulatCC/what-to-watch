@@ -84,7 +84,6 @@ const Film = () => {
                 <section className='catalog catalog--like-this'>
                     <h2 className="catalog__title">More like this</h2>
                     {similarFilmData && <FilmsList films={similarFilmData} />}
-
                 </section>
                 <Footer isPageMain={false} />
             </div>

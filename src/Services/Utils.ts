@@ -1,5 +1,4 @@
 import { FilmRateDescription } from '../consts';
-import { filmsData } from '../mock/filmsData';
 import { FilmCardType } from '../Types/Films';
 
 const validateEmail = (value: string) => {
@@ -24,7 +23,7 @@ const filmRate = (rateNumber: number) => {
     }
 }
 
-const getGenries = (data: typeof filmsData) => {
+const getGenries = (data: FilmCardType[]) => {
     const genries = data.reduce((acc: string[], item) => {
         return [...acc, item.genre];
     }, []);

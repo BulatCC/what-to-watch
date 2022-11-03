@@ -9,14 +9,12 @@ import { Loader } from '../../Components/Loader/Loader';
 import { getGenries, filterFilmsByGenre } from '../../Services/Utils';
 import { DEFAULT_GENRE } from '../../consts';
 import { FilmCardType } from '../../Types/Films';
-
 import { appContext } from '../../Context/App';
 
 const Main = () => {
     const { state: { defaultFilmsData, isDataLoaded, currentFilm } } = useContext(appContext);
     const [activeGenre, setActiveGenre] = useState<string>(DEFAULT_GENRE);
     const [filteredFilms, setFilteredFilms] = useState<FilmCardType[]>(defaultFilmsData);
-
     const genries = getGenries(defaultFilmsData);
 
     useEffect(() => {

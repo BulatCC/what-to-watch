@@ -35,13 +35,18 @@ const ReviewForm = ({ bgColor, filmId }: ReviewFormProps) => {
         if (!review.comment) {
             commentError = 'Напишите отзыв';
         }
-        return `${rateError} ${commentError}`;
+
+        if (rateError || commentError) {
+            return `${rateError} ${commentError}`;
+        }
+        return false
     }
 
     const reviewSubmitHandler = (evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
-        setError(errorHandler())
-        if (!error) {
+        let isError = errorHandler();
+        setError(isError);
+        if (!isError) {
             api.post(`${ApiRoute.Comments}/${filmId}`, review)
             .then(() => {
                 navigate(`${AppRoute.Film}/${filmId}`);
@@ -77,10 +82,8 @@ const ReviewForm = ({ bgColor, filmId }: ReviewFormProps) => {
                     <button className="add-review__btn" type="submit">Post</button>
                 </div>
             </div>
-            {error && <p style={{color: 'red'}} >{error}</p>}
-
+            {error && <p style={{color: 'red'}}>{error}</p>}
         </form>
-        
     );
 }
 

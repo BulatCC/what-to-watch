@@ -1,13 +1,11 @@
 const AUTH_TOKEN_KEY_NAME = 'wtw-token';
 
-type Token = string;
-
-const getToken = (): Token => {
+const getToken = (): string => {
     const token = localStorage.getItem(AUTH_TOKEN_KEY_NAME);
     return token ?? '';
 };
 
-const saveToken = (token: Token): void => {
+const saveToken = (token: string): void => {
     localStorage.setItem(AUTH_TOKEN_KEY_NAME, token);
 };
 

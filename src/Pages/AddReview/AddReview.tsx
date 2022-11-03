@@ -7,7 +7,6 @@ import { ReviewForm } from '../../Components/ReviewForm/ReviewForm';
 import { AppRoute } from '../../consts';
 import { appContext } from '../../Context/App';
 
-
 const AddReview = () => {
     const { state: { currentFilm } } = useContext(appContext);
 
@@ -16,7 +15,6 @@ const AddReview = () => {
     }
 
     const { backgroundImage, backgroundColor, posterImage, name, id } = currentFilm;
-
     const crumbsData = [
         {
             title: name,

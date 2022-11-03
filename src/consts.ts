@@ -1,8 +1,3 @@
-const ButtonFontSize = {
-    SM: 'SM',
-    MD: 'MD',
-};
-
 const TabNameList = {
     Overview: 'Overview',
     Details: 'Details',
@@ -46,9 +41,7 @@ const AuthorizationStatus = {
     Unknown: 'UNKNOWN',
   };
   
-
 export { 
-    ButtonFontSize, 
     TabNameList, 
     AppRoute, 
     FilmRateDescription, 

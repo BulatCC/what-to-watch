@@ -44,7 +44,6 @@ const ReviewList = ({ id }: ReviewListProps) => {
                         </div>
                     </>
             }
-
         </div>
     );
 }

@@ -2,7 +2,6 @@ import { ApiRoute } from '../consts';
 import { actionCreator } from './Actions';
 import { createApi } from '../Services/Api';
 import { AuthData } from '../Types/Auth';
-import { ReviewPostType } from '../Types/Review';
 import { dispatchType } from '../Types/Context';
 import { saveToken, dropToken } from '../Services/Token';
 import { AuthorizationStatus } from '../consts';

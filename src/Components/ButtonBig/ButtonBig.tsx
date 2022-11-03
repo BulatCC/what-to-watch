@@ -1,7 +1,3 @@
-import { ButtonFontSize } from '../../consts';
-
-type btnSize = typeof ButtonFontSize.MD | typeof ButtonFontSize.SM;
-
 type ButtonBigProps = {
     title: string;
     clickHandler: () => void;

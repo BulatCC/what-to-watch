@@ -1,8 +1,6 @@
 import { Header } from '../../Components/Header/Header';
-import { Footer } from '../../Components/Footer/Footer';
 import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../consts';
-
 
 const NotFound = () => {
     return (
