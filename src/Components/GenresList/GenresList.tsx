@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { DEFAULT_GENRE } from '../../consts';
 
 type GenresListProps = {
     genresList: string[];
@@ -11,7 +10,6 @@ const GenresList = ({ genresList, defaultGennre,  activeGenreHandler }: GenresLi
     const [activeGenre, setActiveGenre] = useState<string>(defaultGennre);
     const genresListwithAllGenres = [defaultGennre, ...genresList];
     
-
     return (
         <ul className='catalog__genres-list'>
             {genresListwithAllGenres.map(genre => (

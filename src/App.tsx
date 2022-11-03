@@ -25,7 +25,7 @@ const App = () => {
         <Routes>
             <Route path={AppRoute.Root} element={<Main />} />
             <Route path={AppRoute.Login} element={<Login />} />
-            <Route path={AppRoute.Film} element={<Film />} />
+            <Route path={AppRoute.FilmId} element={<Film />} />
             <Route path={AppRoute.Review} element={<AddReview />} />
             <Route path={AppRoute.Player} element={<Player />} />
             <Route path={AppRoute.MyList}

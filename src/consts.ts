@@ -14,7 +14,8 @@ const AppRoute = {
     NotFound: '*',
     Login: '/login',
     MyList: '/mylist',
-    Film: '/film/:id',
+    FilmId: '/film/:id',
+    Film: '/film',
     Review: '/film/:id/review',
     Player: '/player/:id',
 };
@@ -25,6 +26,7 @@ const ApiRoute = {
     Promo: '/promo',
     Login: '/login',
     Logout: '/logout',
+    Favorite: '/favorite',
 };
 
 const FilmRateDescription = {

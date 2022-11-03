@@ -3,15 +3,22 @@ import { Button } from '../Button/Button';
 import { AppRoute, AuthorizationStatus } from '../../consts';
 import { appContext } from '../../Context/App';
 import { Loader } from '../../Components/Loader/Loader';
+import { apiActions } from '../../Context/ApiActions';
 
 const FilmCardPreview = () => {
     const { state: { authorizationStatus, currentFilm } } = useContext(appContext);
+    const { dispatch } = useContext(appContext);
 
     if (!currentFilm) {
         return <Loader />;
     }
 
-    const { id, posterImage, name, genre, released } = currentFilm;
+    const { id, posterImage, name, genre, released, isFavorite } = currentFilm;
+
+    const favoriteAddRemove = () => {
+        apiActions.favoriteAddRemove(dispatch, id, +!isFavorite);
+    }
+
 
     return (
         <div className="film-card__wrap">
@@ -29,7 +36,8 @@ const FilmCardPreview = () => {
 
                     <div className="film-card__buttons">
                         <Button title='Play' svgHref='#play-s' linkPath={AppRoute.Player} linkId={id.toString()} />
-                        {authorizationStatus === AuthorizationStatus.Auth && <Button title='My list' svgHref='#add' />}
+                        {authorizationStatus === AuthorizationStatus.Auth && <Button title='My list' svgHref={`${isFavorite ? '#in-list' : '#add'}`} clickHandler={favoriteAddRemove}/>}
+                        {authorizationStatus === AuthorizationStatus.NoAuth && <Button title='My list' svgHref='#add' linkPath={AppRoute.Login} />}
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FilmCardType } from '../../Types/Films';
-import { Link, generatePath } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AppRoute } from '../../consts';
 
 type FilmCardProps = {
@@ -8,7 +8,7 @@ type FilmCardProps = {
 };
 
 const FilmCard = ({ filmData: { id, previewImage, name, previewVideoLink } }: FilmCardProps) => {
-    const link = generatePath(AppRoute.Film, { id: id && id });
+    const link = `${AppRoute.Film}/${id}`;
     const [isMouseInside, setIsMouseInside] = useState(false);
     const [showVideo, setShowVideo] = useState(isMouseInside);
 

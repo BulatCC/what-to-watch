@@ -6,12 +6,10 @@ import { apiActions } from '../../Context/ApiActions';
 
 const UserBlock = () => {
     const { dispatch, state: { authorizationStatus, userData: { email, avatarUrl } } } = useContext(appContext);
-
     const logoutClickHandler = () => {
         apiActions.logout(dispatch);
     }
 
-    console.log(email, avatarUrl)
     return (
         <>
             {authorizationStatus === AuthorizationStatus.Auth

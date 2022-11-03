@@ -35,11 +35,15 @@ const Film = () => {
         return <Loader />;
     }
 
-    const { backgroundImage, backgroundColor, posterImage, name, genre, released, id } = currentFilm;
+    const { backgroundImage, backgroundColor, posterImage, name, genre, released, id, isFavorite } = currentFilm;
+
+    const favoriteAddRemove = () => {
+        apiActions.favoriteAddRemove(dispatch, id, +!isFavorite);
+    }
 
     return (
         <>
-            <section className='film-card film-card--full' style={{backgroundColor: backgroundColor}}>
+            <section className='film-card film-card--full' style={{ backgroundColor: backgroundColor }}>
                 <div className='film-card__hero'>
                     <FilmCardBackground img={backgroundImage} altText={name} />
                     <Header isPageMain={false} cssClass='user-page__head' userBlock={true} />
@@ -53,8 +57,11 @@ const Film = () => {
 
                             <div className='film-card__buttons'>
                                 <Button title='Play' svgHref='#play-s' linkPath={AppRoute.Player} linkId={id.toString()} />
-                                {authorizationStatus === AuthorizationStatus.Auth && <Button title='My list' svgHref='#add' />}
-                                <Button title='Add review' linkPath={AppRoute.Review} linkId={id.toString()} />
+                                {authorizationStatus === AuthorizationStatus.Auth && <Button title='My list' svgHref={`${isFavorite ? '#in-list' : '#add'}`} clickHandler={favoriteAddRemove} />}
+                                {authorizationStatus === AuthorizationStatus.NoAuth && <Button title='My list' svgHref='#add' linkPath={AppRoute.Login} />}
+                                {authorizationStatus === AuthorizationStatus.Auth && <Button title='Add review' linkPath={AppRoute.Review} linkId={id.toString()} />}
+                                {authorizationStatus === AuthorizationStatus.NoAuth && <Button title='Add review' linkPath={AppRoute.Login} />}
+
                             </div>
                         </div>
                     </div>
@@ -77,7 +84,7 @@ const Film = () => {
                 <section className='catalog catalog--like-this'>
                     <h2 className="catalog__title">More like this</h2>
                     {similarFilmData && <FilmsList films={similarFilmData} />}
-                    
+
                 </section>
                 <Footer isPageMain={false} />
             </div>

@@ -23,4 +23,4 @@ type ActionType = {
 
 type dispatchType = (arg?: Record<string, unknown>) => void;
 
-export { type AppState, type ContextType, type ActionType, type dispatchType };
+export type { AppState, ContextType, ActionType, dispatchType };

@@ -2,38 +2,37 @@ import { ApiRoute } from '../consts';
 import { actionCreator } from './Actions';
 import { createApi } from '../Services/Api';
 import { AuthData } from '../Types/Auth';
+import { ReviewPostType } from '../Types/Review';
 import { dispatchType } from '../Types/Context';
 import { saveToken, dropToken } from '../Services/Token';
 import { AuthorizationStatus } from '../consts';
 
 const api = createApi();
 
-// let history = useHistory();
-
 const apiActions = {
     getFilms: async (dispatch: dispatchType) => {
         api.get(ApiRoute.Films)
-        .then(({data}) => {
-            dispatch(actionCreator.loadFilms(data));
-            dispatch(actionCreator.isDataLoaded(true));
-        })
-        .catch((e) => console.log(e));
+            .then(({ data }) => {
+                dispatch(actionCreator.loadFilms(data));
+                dispatch(actionCreator.isDataLoaded(true));
+            })
+            .catch((e) => console.log(e));
     },
     getPromoFilm: async (dispatch: dispatchType) => {
         api.get(ApiRoute.Promo)
-        .then(({data}) => {
-            dispatch(actionCreator.currentFilm(data));
-        })
-        .catch((e) => console.log(e));
+            .then(({ data }) => {
+                dispatch(actionCreator.currentFilm(data));
+            })
+            .catch((e) => console.log(e));
     },
-    getCurrentFilm: async (dispatch: dispatchType, urlId:string) => {
+    getCurrentFilm: async (dispatch: dispatchType, urlId: string) => {
         api.get(`${ApiRoute.Films}/${urlId}`)
             .then(({ data }) => {
                 dispatch(actionCreator.currentFilm(data));
             })
             .catch((e) => console.log(e));
     },
-    login: async (dispatch: dispatchType, { email, password }:AuthData) => {
+    login: async (dispatch: dispatchType, { email, password }: AuthData) => {
         api.post(ApiRoute.Login, { email, password })
             .then(({ data }) => {
                 saveToken(data.token);
@@ -65,6 +64,13 @@ const apiActions = {
                     email: '',
                 }));
                 dispatch(actionCreator.auth(AuthorizationStatus.NoAuth));
+            })
+            .catch((e) => console.log(e));
+    },
+    favoriteAddRemove: async (dispatch: dispatchType, filmId: number, isFavorite: number) => {
+        api.post(`${ApiRoute.Favorite}/${filmId}/${isFavorite}`)
+            .then(({ data }) => {
+                dispatch(actionCreator.currentFilm(data));
             })
             .catch((e) => console.log(e));
     },

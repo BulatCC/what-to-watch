@@ -9,4 +9,9 @@ type ReviewType = {
     date: string;
 }
 
-export { type ReviewType };
+type ReviewPostType = {
+    rating: string;
+    comment: string;
+}
+
+export type { ReviewType, ReviewPostType };

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useContext } from 'react';
-import { useNavigate, generatePath, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../consts';
 import { getVideoDuration, timeToPercent } from '../../Services/Utils';
 import { appContext } from '../../Context/App';
@@ -18,7 +18,7 @@ const Player = () => {
     const [video, setVideo] = useState<FilmCardType | null>(currentFilm);
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const urlId = useParams().id as string;
-    const link = generatePath(AppRoute.Film, { id: urlId });
+    const link = `${AppRoute.Film}/${urlId}`;
     const { dispatch } = useContext(appContext);
 
     const fullScreenChangeHandler = () => {
