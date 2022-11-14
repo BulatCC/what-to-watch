@@ -28,16 +28,18 @@ const AddReview = () => {
 
     return (
         <>
-            <section className='film-card film-card--full'style={{backgroundColor: backgroundColor}}>
+            <section className='film-card film-card--full' style={{ backgroundColor: backgroundColor }}>
                 <div className="film-card__header">
                     <FilmCardBackground img={backgroundImage} altText={name} />
-                    <Header isPageMain={false} userBlock={true} children={<BreadCrumbs crumbsData={crumbsData} />} />
+                    <Header isPageMain={false} userBlock={true}>
+                        <BreadCrumbs crumbsData={crumbsData} />
+                    </Header>
                     <div className="film-card__poster film-card__poster--small">
                         <img src={posterImage} alt={name} width="218" height="327" />
                     </div>
                 </div>
                 <div className="add-review">
-                    <ReviewForm bgColor={backgroundColor} filmId={id}/>
+                    <ReviewForm bgColor={backgroundColor} filmId={id} />
                 </div>
             </section>
         </>
